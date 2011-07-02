@@ -20,7 +20,7 @@ void print_stack(){
  
 void kpanic(){
 	printf("KPANIC!!!");
-	while(1);
+	exit(1);
 }
 
 int config_kernel(void *ram_start, 
