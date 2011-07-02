@@ -12,6 +12,14 @@ extern void _div_mod(PARAM);
 /*stack control*/
 extern void _swap(PARAM);
 extern void _dup(PARAM);
+extern void _over(PARAM);
+extern void _drop(PARAM);
+extern void _0sp(PARAM);
+extern void _q_dup(PARAM);
+extern void _rot(PARAM);
+extern void __rot(PARAM);
+extern void _nip(PARAM);
+extern void _tuck(PARAM);
 
 /*logic*/
 
@@ -32,4 +40,12 @@ builtin_list[BLIST_LEN] = { {"+", &_add},
 		    				{"/mod", &_div_mod},
 		    				{"swap", &_swap},
 		    				{"dup", &_dup},
+		    				{"over", &_over},
+		    				{"drop", &_drop},
+		    				{"0sp", &_0sp},
+		    				{"?dup", &_q_dup},
+		    				{"rot", &_rot},
+		    				{"-rot", &__rot},
+		    				{"nip", &_nip},
+		    				{"tuck", &_tuck},
 			      		   };
