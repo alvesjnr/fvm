@@ -14,5 +14,5 @@ For compilind just go to src folder and run:
 
 For running a example:
 
-	$ ./fvm "1 2 + . 3 4 /mod ."
+	$ ./fvm "1 2 + . 3 4 /mod . end"
 
