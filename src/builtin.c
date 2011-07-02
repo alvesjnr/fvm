@@ -50,3 +50,57 @@ void _dup(PARAM){
 	(*sp)++;
 }
 
+void _over(PARAM){
+	//	( a b -- a b a )
+	stack[*sp] = stack[*sp-2];
+	(*sp)++;
+}
+
+void _drop(PARAM){
+	//	( a -- )
+	(*sp)--;
+}
+
+void _0sp(PARAM){
+	//	( a b ... -- )
+	*sp = 0;
+}
+
+void _q_dup(PARAM){
+	//?dup
+	//( n -- n n | 0 , duplicate only if non-zero, '|' means OR )
+	if(*sp-1){
+		stack[*sp] = stack[*sp-1];
+		(*sp)++;
+	}
+}
+
+void _rot(PARAM){
+	// rot
+	//	( a b c ... b c a )
+	stack[*sp] = stack[*sp-1];
+	stack[*sp-1] = stack[*sp-3];
+	stack[*sp-2] = stack[*sp];
+	stack[*sp-3] = stack[*sp-1];
+}
+
+void __rot(PARAM){
+	// -rot
+	//	( a b c ... c a b )
+	stack[*sp] = stack[*sp-1];
+	stack[*sp-1] = stack[*sp-2];
+	stack[*sp-2] = stack[*sp-3];
+	stack[*sp-3] = stack[*sp];
+}
+
+void _nip(PARAM){
+	//	( a b -- b ) swap drop ;
+	stack[*sp-2] = stack[*sp-1];
+	(*sp)--;
+}
+
+void _tuck(PARAM){
+	//	( a b -- b a b ) swap over ;
+	stack[*sp] = stack[*sp-2];
+	(*sp)++;
+}
