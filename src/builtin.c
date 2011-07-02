@@ -104,3 +104,57 @@ void _tuck(PARAM){
 	stack[*sp] = stack[*sp-2];
 	(*sp)++;
 }
+
+void _equ(PARAM){
+	//	( a b -- b==b ) swap over ;
+	if(stack[*sp-1] == stack[*sp-2])
+		stack[*sp] = 0;
+	else
+		stack[*sp] = -1;
+	(*sp)++;
+}
+
+void _gte(PARAM){
+	//	( a b -- b>a ) swap over ;
+	if(stack[*sp-1] > stack[*sp-2])
+		stack[*sp] = 0;
+	else
+		stack[*sp] = -1;
+	(*sp)++;
+}
+
+void _lte(PARAM){
+	//	( a b -- b<a ) swap over ;
+	if(stack[*sp-1] < stack[*sp-2])
+		stack[*sp] = 0;
+	else
+		stack[*sp] = -1;
+	(*sp)++;
+}
+
+void _gteq(PARAM){
+	//	( a b -- b>a ) swap over ;
+	if(stack[*sp-1] >= stack[*sp-2])
+		stack[*sp] = 0;
+	else
+		stack[*sp] = -1;
+	(*sp)++;
+}
+
+void _lteq(PARAM){
+	//	( a b -- b<=a ) swap over ;
+	if(stack[*sp-1] <= stack[*sp-2])
+		stack[*sp] = 0;
+	else
+		stack[*sp] = -1;
+	(*sp)++;
+}
+
+void _invert(PARAM){
+	//	( a b -- b>b ) swap over ;
+	stack[*sp-1] = ~stack[*sp-1];
+	(*sp)++;
+}
+
+
+

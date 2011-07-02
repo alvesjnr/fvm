@@ -1,5 +1,5 @@
 #define PARAM int *stack, int *sp
-#define BLIST_LEN 8
+#define BLIST_LEN 22
 
 /*arithimetic*/
 extern void _add(PARAM);
@@ -22,6 +22,12 @@ extern void _nip(PARAM);
 extern void _tuck(PARAM);
 
 /*logic*/
+extern void _equ(PARAM);
+extern void _gte(PARAM);
+extern void _lte(PARAM);
+extern void _gteq(PARAM);
+extern void _lteq(PARAM);
+extern void _invert(PARAM);
 
 /* I/O */
 
@@ -32,20 +38,15 @@ typedef struct {
 } BIWord;
 
 extern BIWord const
-builtin_list[BLIST_LEN] = { {"+", &_add},
-		    				{"-", &_sub},
-		    				{"*", &_mul},
-		    				{"/", &_div},
-		    				{"mod", &_mod},
-		    				{"/mod", &_div_mod},
-		    				{"swap", &_swap},
-		    				{"dup", &_dup},
-		    				{"over", &_over},
-		    				{"drop", &_drop},
-		    				{"0sp", &_0sp},
-		    				{"?dup", &_q_dup},
-		    				{"rot", &_rot},
-		    				{"-rot", &__rot},
-		    				{"nip", &_nip},
+builtin_list[BLIST_LEN] = { {"+", &_add}, {"-", &_sub}, {"*", &_mul}, {"/", &_div}, 
+							{"mod", &_mod}, {"/mod", &_div_mod},
+
+		    				{"swap", &_swap}, {"dup", &_dup}, {"over", &_over}, 
+		    				{"drop", &_drop}, {"0sp", &_0sp}, {"?dup", &_q_dup},
+		    				{"rot", &_rot}, {"-rot", &__rot},{"nip", &_nip},
 		    				{"tuck", &_tuck},
+				
+							{"=", &_equ}, {">", &_gte}, {"<", &_lte}, 
+							{">=", &_gteq}, {"<=", &_lteq}, {"neg", &_invert},
+
 			      		   };
