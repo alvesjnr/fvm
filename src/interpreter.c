@@ -10,6 +10,12 @@ extern int sp;
 extern void push_stack(int value);
 extern int pop_stack();
 
+void print_stack(int *stack){
+    int i=0;
+    for(i=0; i<sp; i++)
+        printf("%i ",stack[i]);
+    printf("\n");
+}
 
 void define_word(char word_definition[]){
         
@@ -24,7 +30,7 @@ void define_word(char word_definition[]){
 
 }
 
-void parse(char source[], char *stack){
+void parse(char source[], int *stack){
     
     const char* token = " \n";
     const char* end_token = ";";
@@ -33,6 +39,11 @@ void parse(char source[], char *stack){
     char *word = strtok(source,token);
     while (word != NULL)
     {
+
+        if(!strcmp(word,".s")){
+            print_stack(stack);
+            break;
+        }
 
         if(!strcmp(word,":")){
             //parse a word definition

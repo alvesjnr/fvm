@@ -10,13 +10,8 @@ int ram_len;
 int dict_len;
 int stack_len;
 
-int sp;
+int sp;	/*main stackpointer*/
 
-void print_stack(){
-	int i=0;
-	for(i=0; i<sp; i++)
-		printf("|%i|",stack[i]);
-}
  
 void kpanic(){
 	printf("KPANIC!!!");
