@@ -47,6 +47,14 @@ void start_kernel(char sourcecode[]){
 	parse(sourcecode, stack); //fixme: dont parse all in a single punch!)
 }
 
+void run_console(){
+	char input[100];
+	while(1){
+		printf(">");
+		scanf("%s",input);
+		parse(input,stack);
+	}
+}
 void push_stack(int value){
 
 	if(sp==stack_len)

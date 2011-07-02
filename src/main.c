@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "kernel.h"
+#include "interpreter.h"
 
 #define RAM_LEN 512
 #define DICT_LEN 256
@@ -23,11 +24,28 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
-	char *sourcecode = argv[1];
-
-	if(config_kernel(ram, RAM_LEN, dict, DICT_LEN, stack, STACK_LEN)
-	   ){
-		start_kernel(sourcecode);
+	if(!strcmp("-c",argv[1])){
+		config_kernel(ram, RAM_LEN, dict, DICT_LEN, stack, STACK_LEN);
+		run_console();
+	}
+	else{
+		FILE *fp;		
+		fp=fopen(argv[1], "r");
+		if(fp==NULL) {
+    		printf("Cannot open file.\n");
+    		exit(1);
+  		}
+		char sourcecode[100];
+		int i;
+		for(i=0; i<100; i++){
+			sourcecode[i] = fgetc(fp);
+			if(sourcecode[i]==EOF)
+				break;
+		}
+		if(config_kernel(ram, RAM_LEN, dict, DICT_LEN, stack, STACK_LEN)
+		   ){
+			start_kernel(sourcecode);
+		}
 	}
 	kpanic();
 }

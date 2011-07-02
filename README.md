@@ -14,5 +14,14 @@ For compilind just go to src folder and run:
 
 For running a example:
 
-	$ ./fvm "1 2 + . 3 4 /mod . end"
+	$ ./fvm sourcetest.fth
+
+For running as a console:
+
+	$ ./fvm -c
+
+Word Set
+________
+
+For a while FVM supports a very limited words set. I didn't make a list with all those words, but you can easily see them in builtin.h
 
