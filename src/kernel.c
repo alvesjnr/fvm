@@ -8,11 +8,12 @@
 
 /*global definitions start here*/
 char *ram;
-char *dict;
+struct WDict *wdict;
 int stack[100];
 int ram_len;
 int dict_len;
 int stack_len;
+int dict_cont;
 
 int sp;	/*main stackpointer*/
 char *source; /*main program pointer*/
@@ -34,7 +35,7 @@ int config_kernel(char *code_start,
 	
 	source = code_start;
 	ram = ram_start;
-	dict = dict_start;
+	wdict = dict_start;
 	//stack = stack_start;
 	ram_len = ram_size; 
 	dict_len = dict_size; 
@@ -42,6 +43,7 @@ int config_kernel(char *code_start,
 
 	sp = 0;
 	pc = 0;
+	dict_cont = 0;
 
 	return 1;
 }

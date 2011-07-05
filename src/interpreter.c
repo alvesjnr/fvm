@@ -5,6 +5,7 @@
 
 #include "utils.h"
 #include "builtin.h"
+#include "kernel.h"
 
 #define RUNNING_ON_PC
 
@@ -12,7 +13,17 @@ extern int sp;
 extern void push_stack(int value);
 extern int pop_stack();
 extern int stack[];
+extern int dict_cont;
+extern struct WDict *wdict;
 
+#ifdef RUNNING_ON_PC
+void print_stack(){
+    int i=0;
+    for(i=0; i<sp; i++)
+        printf("%i ",stack[i]);
+    printf("\n");
+}
+#endif
 
 void parse(char source[]){
     
@@ -82,22 +93,18 @@ int apply_word(char *word){
     return 1;
 }
 
-void print_stack(){
-    int i=0;
-    for(i=0; i<sp; i++)
-        printf("%i ",stack[i]);
-    printf("\n");
-}
-
 void define_word(char word_definition[]){
         
-    const char* token = " \n";
-    const char* end = "END";
+    //const char* token = " \n";
+    //const char* end = ";";
 
-    char *key = strtok(word_definition,token);
-    char *value = strtok(NULL,end);
+    //printf("%s\n",word_definition);
+    //char *key = strtok(word_definition,token);
+    //char *value = strtok(NULL,end);
 
+    //strcpy(wdict[dict_cont].wname,"key");
+    //dict_cont++;
     //insert a key-value into names dictionary
-    printf("added %s: %s\n",key,value);
+    //printf("added %s: %s\n",key,value);
 
 }
