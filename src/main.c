@@ -25,7 +25,7 @@ int main(int argc, char *argv[]){
 	}
 
 	if(!strcmp("-c",argv[1])){
-		config_kernel(ram, RAM_LEN, dict, DICT_LEN, stack, STACK_LEN);
+		config_kernel(NULL, ram, RAM_LEN, dict, DICT_LEN, stack, STACK_LEN);
 		run_console();
 	}
 	else{
@@ -42,9 +42,9 @@ int main(int argc, char *argv[]){
 			if(sourcecode[i]==EOF)
 				break;
 		}
-		if(config_kernel(ram, RAM_LEN, dict, DICT_LEN, stack, STACK_LEN)
-		   ){
-			start_kernel(sourcecode);
+		if(config_kernel(sourcecode, ram, RAM_LEN, dict, DICT_LEN, stack, STACK_LEN))
+		{
+			start_kernel();
 		}
 	}
 	kpanic();
