@@ -6,30 +6,13 @@
 #include "utils.h"
 #include "builtin.h"
 
+#define RUNNING_ON_PC
+
 extern int sp;
 extern void push_stack(int value);
 extern int pop_stack();
-extern int *stack;
+extern int stack[];
 
-void print_stack(){
-    int i=0;
-    for(i=0; i<sp; i++)
-        printf("%i ",stack[i]);
-    printf("\n");
-}
-
-void define_word(char word_definition[]){
-        
-    const char* token = " \n";
-    const char* end = "END";
-
-    char *key = strtok(word_definition,token);
-    char *value = strtok(NULL,end);
-
-    //insert a key-value into names dictionary
-    printf("added %s: %s\n",key,value);
-
-}
 
 void parse(char source[]){
     
@@ -41,13 +24,15 @@ void parse(char source[]){
     while (word != NULL)
     {
 
-        if(!strcmp(word,"end") || !strcmp(word,"END")){
-            exit(0);
-        }
-
+#ifdef RUNNING_ON_PC
         if(!strcmp(word,".s")){
             print_stack();
             break;
+        }
+#endif
+
+        if(!strcmp(word,"end") || !strcmp(word,"END")){
+            exit(0);
         }
 
         if(!strcmp(word,":")){
@@ -68,7 +53,7 @@ void parse(char source[]){
         else {
             //apply a preentered word
             printf("applying word %s\n",word);
-            if(apply_word(word,stack))
+            if(apply_word(word))
                 kpanic();
         }
 
@@ -76,7 +61,7 @@ void parse(char source[]){
     }
 }
 
-int apply_word(char *word, int *stack){
+int apply_word(char *word){
     
     //check for output
     if(!strcmp(word,".")){
@@ -89,7 +74,7 @@ int apply_word(char *word, int *stack){
     int i;
     for(i=0; i<BLIST_LEN; i++){
         if(!strcmp(word, builtin_list[i].key)){
-            (builtin_list[i]).value(stack,&sp); //its like javascript
+            builtin_list[i].value(stack,&sp);
             return 0;
         }
     }
@@ -97,4 +82,22 @@ int apply_word(char *word, int *stack){
     return 1;
 }
 
+void print_stack(){
+    int i=0;
+    for(i=0; i<sp; i++)
+        printf("%i ",stack[i]);
+    printf("\n");
+}
 
+void define_word(char word_definition[]){
+        
+    const char* token = " \n";
+    const char* end = "END";
+
+    char *key = strtok(word_definition,token);
+    char *value = strtok(NULL,end);
+
+    //insert a key-value into names dictionary
+    printf("added %s: %s\n",key,value);
+
+}

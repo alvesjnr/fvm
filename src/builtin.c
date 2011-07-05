@@ -2,7 +2,7 @@
 
 void _add(PARAM){
 	// ( a b -- a+b )
-	stack[*sp-2] = stack[*sp-2] + stack[*sp-1];
+	stack[(*sp)-2] = stack[(*sp)-2] + stack[(*sp)-1];
 	(*sp)--;
 }
 

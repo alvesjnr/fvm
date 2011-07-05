@@ -51,7 +51,6 @@ void start_kernel(){
 	char code_chunk[CODECHUNK_LIMIT];
 	while(1){
 		get_code_chunk(code_chunk);
-		printf("->%s<-\n", code_chunk );
 		parse(code_chunk); //fixme: dont parse all in a single punch!)
 	}
 }
@@ -60,7 +59,6 @@ void run_console(){
 	//only for emulation on a computer
 	char input[100];
 	while(1){
-		printf(">");
 		scanf("%s",input);
 		parse(input);
 	}
