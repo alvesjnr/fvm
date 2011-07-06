@@ -7,8 +7,8 @@ void _add(PARAM){
 }
 
 void _sub(PARAM){
-	// 	( a b -- a-b )
-	stack[*sp-2] = stack[*sp-2] - stack[*sp-1];
+	// 	( a b -- b-a )
+	stack[*sp-2] = stack[*sp-1] - stack[*sp-2];
 	(*sp)--;
 }
 
@@ -19,21 +19,21 @@ void _mul(PARAM){
 }
 
 void _div(PARAM){
-	// 	( a b -- a/b )
-	stack[*sp-2] = stack[*sp-2] / stack[*sp-1];
+	// 	( a b -- b/a )
+	stack[*sp-2] = stack[*sp-1] / stack[*sp-2];
 	(*sp)--;
 }
 
 void _mod(PARAM){
 	// 	( a b -- b%a )
-	stack[*sp-2] = stack[*sp-2] % stack[*sp-1];
+	stack[*sp-2] = stack[*sp-1] % stack[*sp-2];
 	(*sp)--;
 }
 
 void _div_mod(PARAM){
-	// 	( a b -- a/b a%b )
-	stack[*sp] = stack[*sp-2] / stack[*sp-1];
-	stack[*sp-2] = stack[*sp-2] % stack[*sp-1];
+	// 	( a b -- a%b a/b )
+	stack[*sp] = stack[*sp-1] / stack[*sp-2];
+	stack[*sp-2] = stack[*sp-1] % stack[*sp-2];
 	stack[*sp-1] = stack[*sp];
 }
 
